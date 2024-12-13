@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ytyty\\Desktop\\Dotnetlab2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1BCEFF31-14FC-4735-AE86-B5E0FF1592E9}|Dotnetlab2\\Dotnetlab2.csproj|c:\\users\\ytyty\\desktop\\dotnetlab2\\dotnetlab2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1BCEFF31-14FC-4735-AE86-B5E0FF1592E9}|Dotnetlab2\\Dotnetlab2.csproj|solutionrelative:dotnetlab2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ytyty\\Desktop\\Dotnetlab2\\Dotnetlab2\\Program.cs",
+              "RelativeDocumentMoniker": "Dotnetlab2\\Program.cs",
+              "ToolTip": "C:\\Users\\ytyty\\Desktop\\Dotnetlab2\\Dotnetlab2\\Program.cs*",
+              "RelativeToolTip": "Dotnetlab2\\Program.cs*",
+              "ViewState": "AgIAADYAAAAAAAAAAIAwwE4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T17:39:18.104Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
