@@ -34,7 +34,8 @@ namespace LabWork
         public static T[] GetUniqueElements<T>(this T[] array) where T : IEquatable<T>
         {
             ValidateNotNull(array, nameof(array));
-            return array.Distinct().ToArray();
+            var uniqueElements = new HashSet<T>(array);
+            return uniqueElements.ToArray();
         }
     }
 
