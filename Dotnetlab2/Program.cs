@@ -27,16 +27,30 @@ namespace LabWork
         }
     }
 
+    public class ExtendedDictionaryElement<T, U, V>
+    {
+        public T Key { get; }
+        public U Value1 { get; }
+        public V Value2 { get; }
+
+        public ExtendedDictionaryElement(T key, U value1, V value2)
+        {
+            Key = key ?? throw new ArgumentNullException(nameof(key), "Ключ не може бути null.");
+            Value1 = value1;
+            Value2 = value2;
+        }
+    }
+
     public class ExtendedDictionary<T, U, V> : IEnumerable<ExtendedDictionaryElement<T, U, V>>
     {
         private readonly Dictionary<T, ExtendedDictionaryElement<T, U, V>> _dictionary = new();
 
-        public void Add(T key, U value1, V value2)
+        public void Add(ExtendedDictionaryElement<T, U, V> element)
         {
-            if (key == null) throw new ArgumentNullException(nameof(key), "Ключ не може бути null.");
-            if (_dictionary.ContainsKey(key)) throw new ArgumentException("Ключ вже існує.");
+            if (element == null) throw new ArgumentNullException(nameof(element), "Елемент не може бути null.");
+            if (_dictionary.ContainsKey(element.Key)) throw new ArgumentException("Ключ вже існує.");
 
-            _dictionary[key] = new ExtendedDictionaryElement<T, U, V>(key, value1, value2);
+            _dictionary[element.Key] = element;
         }
 
         public bool Remove(T key) => _dictionary.Remove(key);
@@ -59,26 +73,13 @@ namespace LabWork
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
-    public class ExtendedDictionaryElement<T, U, V>
-    {
-        public T Key { get; }
-        public U Value1 { get; }
-        public V Value2 { get; }
-
-        public ExtendedDictionaryElement(T key, U value1, V value2)
-        {
-            Key = key;
-            Value1 = value1;
-            Value2 = value2;
-        }
-    }
-
     class Program
     {
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
+
             string sample = "hello world";
             Console.WriteLine("Оригінальний рядок: " + sample);
             Console.WriteLine("Інвертований рядок: " + sample.ReverseString());
@@ -90,8 +91,8 @@ namespace LabWork
             Console.WriteLine("Унікальні елементи: " + string.Join(", ", numbers.GetUniqueElements()));
 
             var extendedDictionary = new ExtendedDictionary<int, string, string>();
-            extendedDictionary.Add(1, "Перший", "Значення1");
-            extendedDictionary.Add(2, "Другий", "Значення2");
+            extendedDictionary.Add(new ExtendedDictionaryElement<int, string, string>(1, "Перший", "Значення1"));
+            extendedDictionary.Add(new ExtendedDictionaryElement<int, string, string>(2, "Другий", "Значення2"));
 
             Console.WriteLine("Словник містить ключ 1: " + extendedDictionary.ContainsKey(1));
             Console.WriteLine("Словник містить значення (Перший, Значення1): " + extendedDictionary.ContainsValue("Перший", "Значення1"));
