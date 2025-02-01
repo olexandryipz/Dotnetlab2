@@ -8,21 +8,28 @@ namespace LabWork
 {
     public static class Extensions
     {
+        public static T EnsureNotNull<T>(this T value, string paramName, string message = null)
+        {
+            if (value == null)
+                throw new ArgumentNullException(paramName, message ?? $"{paramName} не може бути null.");
+            return value;
+        }
+
         public static string ReverseString(this string input)
         {
-            if (input == null) throw new ArgumentNullException(nameof(input), "Рядок не може бути null.");
+            input.EnsureNotNull(nameof(input), "Рядок не може бути null.");
             return new string(input.Reverse().ToArray());
         }
 
         public static int CountOccurrences<T>(this IEnumerable<T> collection, T value) where T : IEquatable<T>
         {
-            if (collection == null) throw new ArgumentNullException(nameof(collection), "Колекція не може бути null.");
+            collection.EnsureNotNull(nameof(collection), "Колекція не може бути null.");
             return collection.Count(item => item.Equals(value));
         }
 
         public static T[] GetUniqueElements<T>(this T[] array) where T : IEquatable<T>
         {
-            if (array == null) throw new ArgumentNullException(nameof(array), "Масив не може бути null.");
+            array.EnsureNotNull(nameof(array), "Масив не може бути null.");
             return array.Distinct().ToArray();
         }
     }
@@ -35,7 +42,7 @@ namespace LabWork
 
         public ExtendedDictionaryElement(T key, U value1, V value2)
         {
-            Key = key ?? throw new ArgumentNullException(nameof(key), "Ключ не може бути null.");
+            Key = key.EnsureNotNull(nameof(key), "Ключ не може бути null.");
             Value1 = value1;
             Value2 = value2;
         }
@@ -47,7 +54,7 @@ namespace LabWork
 
         public void Add(ExtendedDictionaryElement<T, U, V> element)
         {
-            if (element == null) throw new ArgumentNullException(nameof(element), "Елемент не може бути null.");
+            element.EnsureNotNull(nameof(element), "Елемент не може бути null.");
             if (_dictionary.ContainsKey(element.Key)) throw new ArgumentException("Ключ вже існує.");
 
             _dictionary[element.Key] = element;
