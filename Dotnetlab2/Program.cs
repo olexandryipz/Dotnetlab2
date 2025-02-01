@@ -8,28 +8,43 @@ namespace LabWork
 {
     public static class Extensions
     {
+        public static T EnsureNotNull<T>(this T value, string paramName, string message = null)
+        {
+            if (value == null)
+                throw new ArgumentNullException(paramName, message ?? $"{paramName} не може бути null.");
+            return value;
+        }
+
         public static string ReverseString(this string input)
         {
-            if (input == null) throw new ArgumentNullException(nameof(input), "Рядок не може бути null.");
+            input.EnsureNotNull(nameof(input), "Рядок не може бути null.");
             return new string(input.Reverse().ToArray());
         }
 
-        public static int CountOccurrences(this string input, char character)
+        public static int CountOccurrences<T>(this IEnumerable<T> collection, T value) where T : IEquatable<T>
         {
-            if (input == null) throw new ArgumentNullException(nameof(input), "Рядок не може бути null.");
-            return input.Count(c => c == character);
-        }
-
-        public static int CountOccurrences<T>(this T[] array, T value) where T : IEquatable<T>
-        {
-            if (array == null) throw new ArgumentNullException(nameof(array), "Масив не може бути null.");
-            return array.Count(item => item.Equals(value));
+            collection.EnsureNotNull(nameof(collection), "Колекція не може бути null.");
+            return collection.Count(item => item.Equals(value));
         }
 
         public static T[] GetUniqueElements<T>(this T[] array) where T : IEquatable<T>
         {
-            if (array == null) throw new ArgumentNullException(nameof(array), "Масив не може бути null.");
+            array.EnsureNotNull(nameof(array), "Масив не може бути null.");
             return array.Distinct().ToArray();
+        }
+    }
+
+    public class ExtendedDictionaryElement<T, U, V>
+    {
+        public T Key { get; }
+        public U Value1 { get; }
+        public V Value2 { get; }
+
+        public ExtendedDictionaryElement(T key, U value1, V value2)
+        {
+            Key = key.EnsureNotNull(nameof(key), "Ключ не може бути null.");
+            Value1 = value1;
+            Value2 = value2;
         }
     }
 
@@ -37,12 +52,12 @@ namespace LabWork
     {
         private readonly Dictionary<T, ExtendedDictionaryElement<T, U, V>> _dictionary = new();
 
-        public void Add(T key, U value1, V value2)
+        public void Add(ExtendedDictionaryElement<T, U, V> element)
         {
-            if (key == null) throw new ArgumentNullException(nameof(key), "Ключ не може бути null.");
-            if (_dictionary.ContainsKey(key)) throw new ArgumentException("Ключ вже існує.");
+            element.EnsureNotNull(nameof(element), "Елемент не може бути null.");
+            if (_dictionary.ContainsKey(element.Key)) throw new ArgumentException("Ключ вже існує.");
 
-            _dictionary[key] = new ExtendedDictionaryElement<T, U, V>(key, value1, value2);
+            _dictionary[element.Key] = element;
         }
 
         public bool Remove(T key) => _dictionary.Remove(key);
@@ -65,26 +80,13 @@ namespace LabWork
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
-    public class ExtendedDictionaryElement<T, U, V>
-    {
-        public T Key { get; }
-        public U Value1 { get; }
-        public V Value2 { get; }
-
-        public ExtendedDictionaryElement(T key, U value1, V value2)
-        {
-            Key = key;
-            Value1 = value1;
-            Value2 = value2;
-        }
-    }
-
     class Program
     {
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
+
             string sample = "hello world";
             Console.WriteLine("Оригінальний рядок: " + sample);
             Console.WriteLine("Інвертований рядок: " + sample.ReverseString());
@@ -96,8 +98,8 @@ namespace LabWork
             Console.WriteLine("Унікальні елементи: " + string.Join(", ", numbers.GetUniqueElements()));
 
             var extendedDictionary = new ExtendedDictionary<int, string, string>();
-            extendedDictionary.Add(1, "Перший", "Значення1");
-            extendedDictionary.Add(2, "Другий", "Значення2");
+            extendedDictionary.Add(new ExtendedDictionaryElement<int, string, string>(1, "Перший", "Значення1"));
+            extendedDictionary.Add(new ExtendedDictionaryElement<int, string, string>(2, "Другий", "Значення2"));
 
             Console.WriteLine("Словник містить ключ 1: " + extendedDictionary.ContainsKey(1));
             Console.WriteLine("Словник містить значення (Перший, Значення1): " + extendedDictionary.ContainsValue("Перший", "Значення1"));
