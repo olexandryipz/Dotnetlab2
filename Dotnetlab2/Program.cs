@@ -60,9 +60,17 @@ namespace LabWork
                                                 EqualityComparer<V>.Default.Equals(e.Value2, value2));
         }
 
-        public ExtendedDictionaryElement<T, U, V> this[T key] => _dictionary.ContainsKey(key)
-            ? _dictionary[key]
-            : throw new KeyNotFoundException("Ключ не знайдено.");
+        public ExtendedDictionaryElement<T, U, V> this[T key]
+        {
+            get
+            {
+                if (_dictionary.TryGetValue(key, out var element))
+                {
+                    return element;
+                }
+                throw new KeyNotFoundException($"Ключ '{key}' не знайдено.");
+            }
+        }
 
         public int Count => _dictionary.Count;
 
