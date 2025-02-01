@@ -14,16 +14,10 @@ namespace LabWork
             return new string(input.Reverse().ToArray());
         }
 
-        public static int CountOccurrences(this string input, char character)
+        public static int CountOccurrences<T>(this IEnumerable<T> collection, T value) where T : IEquatable<T>
         {
-            if (input == null) throw new ArgumentNullException(nameof(input), "Рядок не може бути null.");
-            return input.Count(c => c == character);
-        }
-
-        public static int CountOccurrences<T>(this T[] array, T value) where T : IEquatable<T>
-        {
-            if (array == null) throw new ArgumentNullException(nameof(array), "Масив не може бути null.");
-            return array.Count(item => item.Equals(value));
+            if (collection == null) throw new ArgumentNullException(nameof(collection), "Колекція не може бути null.");
+            return collection.Count(item => item.Equals(value));
         }
 
         public static T[] GetUniqueElements<T>(this T[] array) where T : IEquatable<T>
