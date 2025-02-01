@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ytyty\\Desktop\\Dotnetlab2\\Dotnetlab2\\Dotnetlab2.csproj": {}
+    "F:\\prak\\Dotnetlab2\\Dotnetlab2\\Dotnetlab2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ytyty\\Desktop\\Dotnetlab2\\Dotnetlab2\\Dotnetlab2.csproj": {
+    "F:\\prak\\Dotnetlab2\\Dotnetlab2\\Dotnetlab2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ytyty\\Desktop\\Dotnetlab2\\Dotnetlab2\\Dotnetlab2.csproj",
+        "projectUniqueName": "F:\\prak\\Dotnetlab2\\Dotnetlab2\\Dotnetlab2.csproj",
         "projectName": "Dotnetlab2",
-        "projectPath": "C:\\Users\\ytyty\\Desktop\\Dotnetlab2\\Dotnetlab2\\Dotnetlab2.csproj",
-        "packagesPath": "C:\\Users\\ytyty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ytyty\\Desktop\\Dotnetlab2\\Dotnetlab2\\obj\\",
+        "projectPath": "F:\\prak\\Dotnetlab2\\Dotnetlab2\\Dotnetlab2.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "F:\\prak\\Dotnetlab2\\Dotnetlab2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\VisualStudioThird\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ytyty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,7 +42,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -66,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

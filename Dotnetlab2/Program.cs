@@ -8,27 +8,32 @@ namespace LabWork
 {
     public static class Extensions
     {
+        private static void ValidateNotNull(object obj, string paramName)
+        {
+            if (obj == null)
+                throw new ArgumentNullException(paramName, $"{paramName} cannot be null.");
+        }
         public static string ReverseString(this string input)
         {
-            if (input == null) throw new ArgumentNullException(nameof(input), "Рядок не може бути null.");
+            ValidateNotNull(input, nameof(input));
             return new string(input.Reverse().ToArray());
         }
 
         public static int CountOccurrences(this string input, char character)
         {
-            if (input == null) throw new ArgumentNullException(nameof(input), "Рядок не може бути null.");
+            ValidateNotNull(input, nameof(input));
             return input.Count(c => c == character);
         }
 
         public static int CountOccurrences<T>(this T[] array, T value) where T : IEquatable<T>
         {
-            if (array == null) throw new ArgumentNullException(nameof(array), "Масив не може бути null.");
+            ValidateNotNull(array, nameof(array));
             return array.Count(item => item.Equals(value));
         }
 
         public static T[] GetUniqueElements<T>(this T[] array) where T : IEquatable<T>
         {
-            if (array == null) throw new ArgumentNullException(nameof(array), "Масив не може бути null.");
+            ValidateNotNull(array, nameof(array));
             return array.Distinct().ToArray();
         }
     }
