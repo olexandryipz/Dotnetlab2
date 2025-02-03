@@ -86,17 +86,29 @@ namespace LabWork
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
+            TestStringOperations();
+            TestArrayOpperations();
+            TestDictionaryOperations();
+        }
 
+        static void TestStringOperations()
+        {
             string sample = "hello world";
             Console.WriteLine("Оригінальний рядок: " + sample);
             Console.WriteLine("Інвертований рядок: " + sample.ReverseString());
             Console.WriteLine("Кількість входжень 'l': " + sample.CountOccurrences('l'));
+        }
 
+        static void TestArrayOpperations()
+        {
             int[] numbers = { 1, 2, 2, 3, 4, 4, 4, 5 };
             Console.WriteLine("Оригінальний масив: " + string.Join(", ", numbers));
             Console.WriteLine("Кількість входжень 4: " + numbers.CountOccurrences(4));
             Console.WriteLine("Унікальні елементи: " + string.Join(", ", numbers.GetUniqueElements()));
+        }
 
+        static void TestDictionaryOperations()
+        {
             var extendedDictionary = new ExtendedDictionary<int, string, string>();
             extendedDictionary.Add(new ExtendedDictionaryElement<int, string, string>(1, "Перший", "Значення1"));
             extendedDictionary.Add(new ExtendedDictionaryElement<int, string, string>(2, "Другий", "Значення2"));
