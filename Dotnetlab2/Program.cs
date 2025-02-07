@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LabWork
 {
-    public static class Extensions
+    public static class ValidationExtensions
     {
         public static T EnsureNotNull<T>(this T value, string paramName, string message = null)
         {
@@ -14,13 +14,19 @@ namespace LabWork
                 throw new ArgumentNullException(paramName, message ?? $"{paramName} не може бути null.");
             return value;
         }
+    }
 
+    public static class StringExtensions
+    {
         public static string ReverseString(this string input)
         {
             input.EnsureNotNull(nameof(input), "Рядок не може бути null.");
             return new string(input.Reverse().ToArray());
         }
+    }
 
+    public static class CollectionExtensions
+    {
         public static int CountOccurrences<T>(this IEnumerable<T> collection, T value) where T : IEquatable<T>
         {
             collection.EnsureNotNull(nameof(collection), "Колекція не може бути null.");
