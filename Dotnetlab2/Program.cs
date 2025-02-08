@@ -6,30 +6,35 @@ using System.Text;
 
 namespace LabWork
 {
+    public static class Validator
+    {
+        public static T EnsureNotNull<T>(this T value, string paramName) =>
+            value ?? throw new ArgumentNullException(paramName, $"{paramName} не може бути null.");
+
+        public static void EnsureNotEmpty(this string value, string paramName)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentException($"{paramName} не може бути порожнім.", paramName);
+        }
+    }
+
     public static class Extensions
     {
-        public static T EnsureNotNull<T>(this T value, string paramName, string message = null)
-        {
-            if (value == null)
-                throw new ArgumentNullException(paramName, message ?? $"{paramName} не може бути null.");
-            return value;
-        }
-
         public static string ReverseString(this string input)
         {
-            input.EnsureNotNull(nameof(input), "Рядок не може бути null.");
+            input.EnsureNotNull(nameof(input));
             return new string(input.Reverse().ToArray());
         }
 
         public static int CountOccurrences<T>(this IEnumerable<T> collection, T value) where T : IEquatable<T>
         {
-            collection.EnsureNotNull(nameof(collection), "Колекція не може бути null.");
+            collection.EnsureNotNull(nameof(collection));
             return collection.Count(item => item.Equals(value));
         }
 
         public static T[] GetUniqueElements<T>(this T[] array) where T : IEquatable<T>
         {
-            array.EnsureNotNull(nameof(array), "Масив не може бути null.");
+            array.EnsureNotNull(nameof(array));
             return array.Distinct().ToArray();
         }
     }
@@ -42,7 +47,7 @@ namespace LabWork
 
         public ExtendedDictionaryElement(T key, U value1, V value2)
         {
-            Key = key.EnsureNotNull(nameof(key), "Ключ не може бути null.");
+            Key = key.EnsureNotNull(nameof(key));
             Value1 = value1;
             Value2 = value2;
         }
@@ -54,7 +59,7 @@ namespace LabWork
 
         public void Add(ExtendedDictionaryElement<T, U, V> element)
         {
-            element.EnsureNotNull(nameof(element), "Елемент не може бути null.");
+            element.EnsureNotNull(nameof(element));
             if (_dictionary.ContainsKey(element.Key)) throw new ArgumentException("Ключ вже існує.");
 
             _dictionary[element.Key] = element;
